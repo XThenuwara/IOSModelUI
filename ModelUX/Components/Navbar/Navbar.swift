@@ -35,7 +35,7 @@ struct Navbar: View {
                             .foregroundColor(Color.primary)
                     }
                 }
-            
+                
                 if let trailingIcon = trailingIcon {
                     Button(action: {
                         withAnimation {
@@ -55,16 +55,22 @@ struct Navbar: View {
             .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
             .sheet(isPresented: $isLeadingDrawerOpen) {
                 if let LeadingDrawer = LeadingDrawer {
-                    DrawerMenu(isOpen: $isLeadingDrawerOpen, DrawerView: LeadingDrawer)
+                    DrawerMenu(
+                        isOpen: $isLeadingDrawerOpen,
+                        DrawerView: LeadingDrawer
+                    )
                 }
                 
             }
+            .background(Color.blue.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $isTrailingDrawerOpen) {
                 if let TrailingDrawer = TrailingDrawer {
-                    TrailingDrawer
+                    DrawerMenu(
+                        isOpen: $isTrailingDrawerOpen,
+                        DrawerView: TrailingDrawer
+                    )
                 }
             }
-            
             .background(VisualEffectBlur(effect: .systemMaterial))
             
             
@@ -85,7 +91,7 @@ struct DrawerMenu: View {
                     Spacer()
                     RoundedRectangle(cornerRadius: 20)
                         .frame(width: 150, height: 15)
-                        .foregroundColor(.icon)
+                        .foregroundColor(.secondaryBackground)
                         .padding()
                     
                     Spacer()
@@ -99,9 +105,6 @@ struct DrawerMenu: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .background(
-                VisualEffectBlur(effect: .light)
-            )
             .offset(y: isOpen ? 0 : UIScreen.main.bounds.height)
             .animation(.easeInOut, value: isOpen)
         }
