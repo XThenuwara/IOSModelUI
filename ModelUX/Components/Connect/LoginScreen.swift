@@ -62,7 +62,7 @@ struct LoginScreen: View {
                       Text("Login")
                           .frame(maxWidth: .infinity)
                           .padding()
-                          .background(Color.blue)
+                          .background(Color.black.opacity(0.8))
                           .foregroundColor(.white)
                           .cornerRadius(8)
                   }
